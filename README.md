@@ -5,3 +5,4 @@ As a group we're looking into a couple options:
 * Instacart Data Analysis (items often bought together, trends in items bought etc.)
 * Sentiment Analysis for Twitter
 * Reddit Data Analysis (Demographic data, most popular sub-reddits etc.)
+* Life Insurance Assessment/Risk Analysis (Data set from Kaggle) 
