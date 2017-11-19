@@ -1,5 +1,8 @@
 .classpath
 .project
+.xml
+.iml
 .settings/
 target/
+.idea
 project/
