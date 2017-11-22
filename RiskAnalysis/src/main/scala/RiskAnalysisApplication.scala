@@ -11,6 +11,10 @@ class RiskAnalysisApplication(sparkSession: SparkSession) {
                   .load("IntermediateData.csv")
   data.printSchema()
 
+  //val df = (data.select(data("response").as("label")))
+
+  //df.show()
+
   val colNames: Array[String] = Array("Product_Info_4", "Ins_Age", "BMI", "Employment_Info_1",
     "Employment_Info_4", "Employment_Info_6", "Insurance_History_5", "Family_Hist_2",
     "Family_Hist_4", "Id", "Medical_History_1", "Medical_Keyword_1", "Medical_Keyword_2",
@@ -59,6 +63,16 @@ class RiskAnalysisApplication(sparkSession: SparkSession) {
 //        .format("com.databricks.spark.csv")
 //        .option("header", "true")
 //        .save("IntermediateTestdata.csv")
+
+
+
+
+  //val output2 = assembler.transform(df).select("label","pcaFeatures")
+
+  //output2.show()
+
+
+
 }
 
 object RiskAnalysisApplication {
