@@ -14,7 +14,7 @@ class RiskAnalysisApplication(sparkSession: SparkSession) {
                   .option("inferSchema","true")
                   .format("csv")
                   .load("IntermediateData.csv")
-  data.printSchema()
+//  data.printSchema()
 
   val colNames: Array[String] = Array("Product_Info_4", "Ins_Age", "BMI", "Employment_Info_1",
     "Employment_Info_4", "Employment_Info_6", "Insurance_History_5", "Family_Hist_2",
@@ -69,14 +69,13 @@ class RiskAnalysisApplication(sparkSession: SparkSession) {
   val finalDF: DataFrame = dataWithUniqueId.as("df1").join(resultWithUniqueId.as("df2"), dataWithUniqueId("row_id_1") === resultWithUniqueId("row_id_2"), "inner")
                            .select("df2.features", "df1.response")
 
+  val testDF = finalDF.toDF("features", "label")
 
-  val Array(training,test) = finalDF.randomSplit(Array(0.70, 0.30))
-
+  val Array(training,test) = testDF.randomSplit(Array(0.70, 0.30))
+  test.show(4, truncate = false)
   val lr = new LinearRegression()
 
   val paramGrid: Array[ParamMap] = new ParamGridBuilder().build()
-
-  test.show(4, false)
 
   val trainValidationSplit: TrainValidationSplit = new TrainValidationSplit()
     .setEstimator(lr)
@@ -86,10 +85,10 @@ class RiskAnalysisApplication(sparkSession: SparkSession) {
 
   val model: TrainValidationSplitModel = trainValidationSplit.fit(training)
 
-  // TODO: Rename Response column to label and this should start working
-  model.transform(test).select("features", "response", "prediction").show()
+  model.transform(test).select("features", "label", "prediction").show()
 
-  model.validationMetrics
+  //TODO: Extract training summary from here
+  model.bestModel
 }
 
 object RiskAnalysisApplication {
