@@ -5,7 +5,7 @@ import org.apache.log4j.{Level, Logger}
 //import org.apache.spark.ml.dmlc.xgboost4j.scala.spark.XGBoost
 
 
-object DataIngester {
+class DataIngester {
 
   def run(sparkSession: SparkSession){
 
@@ -26,9 +26,5 @@ object DataIngester {
     val finalDf= clean.na.fill(clean.columns.zip(clean.select(clean.columns.map(mean(_)): _*).first.toSeq).toMap)
 
     finalDf.coalesce(1).write.format("com.databricks.spark.csv").option("header", true).save("Trimed")
-
-
-
-
   }
 }
