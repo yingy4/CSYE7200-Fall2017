@@ -4,7 +4,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 class RiskAnalysisApplication(sparkSession: SparkSession) {
 //  val cleanedData: Unit = new DataIngester().run(sparkSession)
   val pcaDF: DataFrame = new PrincipalComponentAnalysis(sparkSession).run()
-//  val linearRegressionModel: Model[_] = new LinearRegression(pcaDF).run()
+  val linearRegressionModel: Unit = new LinearRegressionAnalysis(pcaDF).run()
   val XGBoostModel: Unit = new XGBoost(pcaDF).run()
 }
 
