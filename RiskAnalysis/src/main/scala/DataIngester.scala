@@ -1,8 +1,5 @@
-import org.apache.spark.sql.{DataFrame, Row, SparkSession}
+import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
-import java.util.Calendar
-import org.apache.log4j.{Level, Logger}
-//import org.apache.spark.ml.dmlc.xgboost4j.scala.spark.XGBoost
 
 
 class DataIngester {

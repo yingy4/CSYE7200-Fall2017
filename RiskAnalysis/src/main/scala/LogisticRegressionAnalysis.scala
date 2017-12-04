@@ -15,7 +15,7 @@ class LogisticRegressionAnalysis(dataFrame:DataFrame) {
      .setFamily("multinomial")
 
    val mlrModel = mlr.fit(dataFrame)
-   println(s"Mutinomial coefficients: ${mlrModel.coefficientMatrix}" +
+   println(s"Multinomial coefficients: ${mlrModel.coefficientMatrix}" +
      s"Multinomial intercepts: ${mlrModel.interceptVector}")
 
  }

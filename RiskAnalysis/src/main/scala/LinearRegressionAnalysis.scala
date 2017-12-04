@@ -26,7 +26,6 @@ class LinearRegressionAnalysis(dataFrame: DataFrame) {
     // normalize data to get integers
     val normalizedData = deNormData.withColumn("prediction", when(deNormData("prediction") >= 8.0, 8.0).otherwise(floor(deNormData("prediction"))))
 
-    //normalizedData.show(20, false)
     println("RMSE Linear Regression: ")
     print(model.bestModel.asInstanceOf[LinearRegressionModel].summary.rootMeanSquaredError)
   }

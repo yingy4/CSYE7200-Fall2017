@@ -1,8 +1,7 @@
 import org.apache.spark.ml.Pipeline
-import org.apache.spark.ml.classification.{DecisionTreeClassificationModel, DecisionTreeClassifier}
-import org.apache.spark.ml.evaluation.{MulticlassClassificationEvaluator, RegressionEvaluator}
-import org.apache.spark.ml.feature.{IndexToString, StringIndexer, VectorIndexer}
-import org.apache.spark.ml.regression.{DecisionTreeRegressionModel, DecisionTreeRegressor}
+import org.apache.spark.ml.evaluation.RegressionEvaluator
+import org.apache.spark.ml.feature.VectorIndexer
+import org.apache.spark.ml.regression.DecisionTreeRegressor
 import org.apache.spark.sql.DataFrame
 
 class DecisionTreeAnalysis(dataFrame: DataFrame) {
@@ -29,11 +28,6 @@ class DecisionTreeAnalysis(dataFrame: DataFrame) {
     val rmse = evaluator.evaluate(predictions)
 
     println("Root Mean Square Error (RMSE) on test data = "+ rmse)
-
-
-//    val treeModel = model.stages(2).asInstanceOf[DecisionTreeRegressionModel]
-//
-//    println("Learned classification tree model:\n" + treeModel.toDebugString)
 
   }
 }
