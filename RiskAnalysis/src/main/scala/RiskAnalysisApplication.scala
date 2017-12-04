@@ -1,11 +1,12 @@
-import org.apache.spark.ml.Model
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 class RiskAnalysisApplication(sparkSession: SparkSession) {
-//  val cleanedData: Unit = new DataIngester().run(sparkSession)
+  val cleanedData: Unit = new DataIngester().run(sparkSession)
   val pcaDF: DataFrame = new PrincipalComponentAnalysis(sparkSession).run()
   val linearRegressionModel: Unit = new LinearRegressionAnalysis(pcaDF).run()
-  val XGBoostModel: Unit = new XGBoost(pcaDF).run()
+//  val XGBoostModel: Unit = new XGBoost(pcaDF).run()
+  val decisionTreeModel: Unit = new DecisionTreeAnalysis(pcaDF).run()
+  val logisticRegressionModel: Unit = new LogisticRegressionAnalysis(pcaDF).run()
 }
 
 object RiskAnalysisApplication {
