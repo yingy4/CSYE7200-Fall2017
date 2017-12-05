@@ -40,9 +40,9 @@ class DataIngester {
     df.columns.contains(colName)
   }
 
-  def checkColumns(df:DataFrame): Boolean ={
+  def checkColumns(df:DataFrame): Boolean = {
 
-    df.filter(x=>)
+    df.columns.isEmpty
 
   }
 }
