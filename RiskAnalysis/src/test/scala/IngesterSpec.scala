@@ -29,11 +29,6 @@ class IngesterSpec extends FunSuite with BeforeAndAfter {
 
     assert(df === false)
   }
-  test("Is any column empty"){
-    val df = new DataIngester().checkColumns(pcaDataFrame)
-
-    assert(df === false)
-  }
   after {
     if (sparkSession != null) {
       sparkSession.stop()
