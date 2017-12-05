@@ -24,13 +24,13 @@ class LinearRegressionAnalysis(dataFrame: DataFrame) {
     val deNormData = model.transform(test).select("features", "label", "prediction")
 
     // normalize data to get integers
-    val normalizedData: DataFrame = deNormalizeData(deNormData)
+    val normalizedData: DataFrame = normalizeData(deNormData)
 
     println("RMSE Linear Regression: ")
     print(model.bestModel.asInstanceOf[LinearRegressionModel].summary.rootMeanSquaredError)
   }
 
-  def deNormalizeData(dataFrame: DataFrame): DataFrame = {
+  def normalizeData(dataFrame: DataFrame): DataFrame = {
     dataFrame.withColumn("prediction", when(dataFrame("prediction") >= 8.0, 8.0).otherwise(floor(dataFrame("prediction"))))
   }
 
