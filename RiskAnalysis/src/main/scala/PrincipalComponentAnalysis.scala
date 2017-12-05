@@ -4,11 +4,8 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 
 class PrincipalComponentAnalysis(sparkSession: SparkSession) {
   def run(): DataFrame = {
-    val data: DataFrame = sparkSession.read
-      .option("header","true")
-      .option("inferSchema","true")
-      .format("csv")
-      .load("Trimed/IntermediateData.csv")
+
+    val data: DataFrame = readCleanedData(sparkSession)
 
     val colNames: Array[String] = Array("Id", "Product_Info_1", "Product_Info_3", "Product_Info_4", "Product_Info_5", "Ins_Age", "Ht", "Wt",
       "BMI", "Employment_Info_1", "Employment_Info_2", "Employment_Info_3", "Employment_Info_6", "InsuredInfo_1", "InsuredInfo_2",
@@ -64,5 +61,13 @@ class PrincipalComponentAnalysis(sparkSession: SparkSession) {
       .select("df2.features", "df1.response")
 
     finalDF.toDF("features", "label")
+  }
+
+  def readCleanedData(sparkSession: SparkSession): DataFrame = {
+    sparkSession.read
+      .option("header","true")
+      .option("inferSchema","true")
+      .format("csv")
+      .load("Trimed/IntermediateData.csv")
   }
 }

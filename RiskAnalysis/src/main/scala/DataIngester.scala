@@ -6,11 +6,9 @@ class DataIngester {
 
   def run(sparkSession: SparkSession){
 
-    val df: DataFrame = sparkSession.read.option("header","true").option("inferSchema","true")
-      .option("delimeter","\t").csv("train.csv")
+    val df: DataFrame = readData(sparkSession)
 
     val newDf: DataFrame = df.drop("Product_Info_2")
-
 
     val null_thresh = df.count()*0.8
 
@@ -23,5 +21,10 @@ class DataIngester {
     val finalDf= clean.na.fill(clean.columns.zip(clean.select(clean.columns.map(mean(_)): _*).first.toSeq).toMap)
 
     finalDf.coalesce(1).write.format("com.databricks.spark.csv").option("header", true).save("Trimed")
+  }
+
+  def readData(sparkSession: SparkSession): DataFrame = {
+    sparkSession.read.option("header","true").option("inferSchema","true")
+      .option("delimeter","\t").csv("train.csv")
   }
 }

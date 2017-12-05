@@ -2,9 +2,11 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.scalatest.{BeforeAndAfter, FlatSpec, FunSuite}
 
 
-class IngesterSpec extends FunSuite with BeforeAndAfter {
+class AlgorithmsAnalysisSpec extends FunSuite with BeforeAndAfter {
 
-   var sparkSession : SparkSession = _
+  var sparkSession : SparkSession = _
+  var dataFrame: DataFrame = _
+  var pcaDataFrame: DataFrame = _
 
   before {
     sparkSession = SparkSession
@@ -14,9 +16,9 @@ class IngesterSpec extends FunSuite with BeforeAndAfter {
       .getOrCreate()
   }
 
-  test("data read"){
-    val df: DataFrame = new DataIngester().readData(sparkSession)
-    assert(df.count() === 59381)
+  test("PCA Read"){
+    pcaDataFrame = new PrincipalComponentAnalysis(sparkSession).readCleanedData(sparkSession)
+    assert(pcaDataFrame.count() === 59381)
   }
 
   after {
