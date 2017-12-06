@@ -1,10 +1,13 @@
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.functions._
-
+import org.apache.log4j.{Level, Logger}
 
 class DataIngester {
 
   def run(sparkSession: SparkSession){
+
+    val rootLogger = Logger.getRootLogger()
+    rootLogger.setLevel(Level.ERROR)
 
     val df: DataFrame = readData(sparkSession)
 

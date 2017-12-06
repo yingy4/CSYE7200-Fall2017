@@ -1,10 +1,12 @@
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.classification.LogisticRegression
-
 import org.apache.spark.sql.DataFrame
 
 class LogisticRegressionAnalysis(dataFrame:DataFrame) {
 
  def run():Unit = {
+  val rootLogger = Logger.getRootLogger()
+  rootLogger.setLevel(Level.ERROR)
   val lr = new LogisticRegression().setMaxIter(10).setRegParam(0.3).setElasticNetParam(0.8)
 
    val lrModel = lr.fit(dataFrame)

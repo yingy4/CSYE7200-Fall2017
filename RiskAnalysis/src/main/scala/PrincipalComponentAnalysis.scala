@@ -1,9 +1,12 @@
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.feature._
 import org.apache.spark.sql.functions.monotonically_increasing_id
 import org.apache.spark.sql.{DataFrame, SparkSession}
 
 class PrincipalComponentAnalysis(sparkSession: SparkSession) {
   def run(): DataFrame = {
+    val rootLogger = Logger.getRootLogger()
+    rootLogger.setLevel(Level.ERROR)
 
     val data: DataFrame = readCleanedData(sparkSession)
 

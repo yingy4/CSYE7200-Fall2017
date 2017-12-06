@@ -1,8 +1,11 @@
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.{DataFrame, Row, SparkSession}
 import org.scalatest.{BeforeAndAfter, FunSuite}
 import org.apache.spark.sql.functions._
 
 class AlgorithmsAnalysisSpec extends FunSuite with BeforeAndAfter {
+  val rootLogger = Logger.getRootLogger()
+  rootLogger.setLevel(Level.ERROR)
 
   var sparkSession : SparkSession = _
   var dataFrame: DataFrame = _

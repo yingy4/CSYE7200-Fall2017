@@ -1,8 +1,11 @@
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.scalatest.{BeforeAndAfter, FlatSpec, FunSuite}
 
 
 class IngesterSpec extends FunSuite with BeforeAndAfter {
+  val rootLogger = Logger.getRootLogger()
+  rootLogger.setLevel(Level.ERROR)
 
    var sparkSession : SparkSession = _
   var pcaDataFrame: DataFrame = _

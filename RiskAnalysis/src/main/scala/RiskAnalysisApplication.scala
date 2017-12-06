@@ -1,5 +1,5 @@
 import org.apache.spark.sql.{DataFrame, SparkSession}
-
+import org.apache.log4j.{Level, Logger}
 
 class RiskAnalysisApplication(sparkSession: SparkSession) {
   /**
@@ -14,6 +14,8 @@ class RiskAnalysisApplication(sparkSession: SparkSession) {
 
 object RiskAnalysisApplication {
   def main(args: Array[String]) {
+    val rootLogger = Logger.getRootLogger()
+    rootLogger.setLevel(Level.ERROR)
     val spark: SparkSession = SparkSession
                               .builder()
                               .config("spark.master", "local")

@@ -1,3 +1,4 @@
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.ml.evaluation.RegressionEvaluator
 import org.apache.spark.ml.param.ParamMap
 import org.apache.spark.ml.regression.{LinearRegression, LinearRegressionModel}
@@ -7,6 +8,8 @@ import org.apache.spark.sql.functions._
 
 class LinearRegressionAnalysis(dataFrame: DataFrame) {
   def run(): Unit = {
+    val rootLogger = Logger.getRootLogger()
+    rootLogger.setLevel(Level.ERROR)
     //split dataFrame into training and test data
     val Array(training,test) = dataFrame.randomSplit(Array(0.70, 0.30))
     val lr = new LinearRegression().setMaxIter(200)
