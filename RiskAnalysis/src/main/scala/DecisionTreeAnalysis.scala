@@ -23,6 +23,8 @@ class DecisionTreeAnalysis(dataFrame: DataFrame) {
     val model = pipeline.fit(trainingData)
     val predictions = model.transform(testData)
 
+    println
+
     predictions.select("prediction", "label", "features").show(15)
 
     val evaluator = new RegressionEvaluator().setLabelCol("label").setPredictionCol("prediction")
