@@ -35,6 +35,18 @@ class LogisticRegressionAnalysis(dataFrame:DataFrame) {
    val rmseLR = regressionEvaluator.evaluate(predictionTest)
 
    println("Root Mean Squared Error (RMSE) Logistic Regression on test data = " + rmseLR)
+//   LR Weight column
+
+   val lrBalanced = new LogisticRegression().setWeightCol("label").setFeaturesCol("features")
+     .setLabelCol("label")
+   val lrBalancedModel = lrBalanced.fit(trainging)
+   val predictionsLrBalancedTest = lrBalancedModel.transform(test)
+   val areaLrBalancedTest = binaryClassificationEvaluator.evaluate(predictionsLrBalancedTest)
+
+   println("Area under ROC uwing logistic regression with Weight Column on test data = "+ areaLrBalancedTest)
+   val rmseLrBalanced = regressionEvaluator.evaluate(predictionsLrBalancedTest)
+   println("Root Mean Square Error (RMSE) Logistic Regression with weight Column on test data = "+
+   rmseLrBalanced)
 
 
  }
